@@ -1,12 +1,42 @@
 {
-  "name": "Demo Addon",
+  "name": "ecowitt2mqtt add-on",
   "version": "0.1",
-  "slug": "myaddon",
-  "description": "Add-on that prints 'Hello, world' to the log and exits",
-  "url": "https://github.com/issacg/hassio-addon-devcontainer",
-  "startup": "once",
-  "boot": "manual",
-  "options": {},
-  "schema": {}, 
+  "slug": "ecowitt2mqtt",
+  "description": "Add-on for the Ecowitt2MQTT gateway",
+  "url": "https://github.com/sujal/ecowitt-addon",
+  "panel_icon": "mdi:z-wave",
+  "panel_title": "OpenZWave",
+  "startup": "services",
+  "boot": "auto",
+  "init": false,
+  "stage": "experimental",
+  "homeassistant": "2020.12.0",
+  "ports": {
+    "8080/tcp": null
+  },
+  "ports_description": {
+    "8080/tcp": "ecowitt2mqtt port"
+  },
+  "services": [
+    "mqtt:need"
+  ],
+  "options": {
+    "mqtt_topic": "",
+    "hass_discovery": {
+      "enabled": true,
+      "prefix": "homeassistant"
+    },
+    "unit_system": "imperial"
+  },
+  "schema": {
+    "mqtt_topic": "str?",
+    "hass_discovery": {
+      "enabled": "bool",
+      "prefix": "str"
+    },
+    "endpoint": "str?",
+    "unit_system": "match(imperial|metric)",
+    "log_level": "match(INFO|WARN|DEBUG)?"
+  }, 
   "arch": ["amd64", "armv7", "armhf", "i386" , "aarch64"]
 }
