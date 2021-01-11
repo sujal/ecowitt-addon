@@ -1,4 +1,4 @@
-#!/usr/bin/env bashio
+#!/usr/bin/with-contenv bashio
 
 # pull MQTT service information
 MQTT_HOST=
@@ -73,7 +73,6 @@ fi
 if [ $(bashio::config.has_value 'log_level') ]; then
     log_level="--log-level=$(bashio::config 'log_level')"
 fi
-
 
 ecowitt2mqtt \
 	$mqtt_broker \
