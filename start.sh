@@ -27,10 +27,14 @@ MQTT_USERNAME=$(bashio::services mqtt "username")
 MQTT_PASSWORD=$(bashio::services mqtt "password")
 mqtt_username=
 mqtt_password=
+loggable_mqtt_password=
 
 if [[ ! -z MQTT_USERNAME ]]; then
     mqtt_username="--mqtt-username=${MQTT_USERNAME}"
-    mqtt_password="--mqtt-password=${MQTT_PASSWORD}"
+    if [[ ! -z "$MQTT_PASSWORD" ]]; then 
+        mqtt_password="--mqtt-password=${MQTT_PASSWORD}"
+        loggable_mqtt_password="--mqtt-password=***" 
+    fi
 fi
 
 # declare variables
@@ -42,7 +46,7 @@ port=
 unit_system=
 log_level=
 
-if [ $(bashio::config.true 'hass_discovery.enabled') ]; then  
+if bashio::config.true 'hass_discovery.enabled'; then  
     
     bashio::log.info "Enabling Home Assistant auto discovery - ignoring MQTT topic if set."
 
@@ -53,26 +57,40 @@ if [ $(bashio::config.true 'hass_discovery.enabled') ]; then
     fi
     
 else
-    if [ $(bashio::config.has_value 'mqtt_topic') ]; then
+    if bashio::config.has_value 'mqtt_topic'; then
         mqtt_topic="--mqtt-topic=$(bashio::config 'mqtt_topic')"
     fi
 fi
 
-if [ $(bashio::config.has_value 'endpoint') ]; then
+if bashio::config.has_value 'endpoint'; then
     endpoint="--endpoint=$(bashio::config 'endpoint')"
 fi
 
-if [ $(bashio::config.has_value 'port') ]; then
+if bashio::config.has_value 'port'; then
     port="--port=$(bashio::config 'port')"
 fi
 
-if [ $(bashio::config.has_value 'unit_system') ]; then
-    unit_system="--unit_system=$(bashio::config 'unit_system')"
+if bashio::config.has_value 'unit_system'; then
+    unit_system="--unit-system=$(bashio::config 'unit_system')"
 fi
 
-if [ $(bashio::config.has_value 'log_level') ]; then
+if bashio::config.has_value 'log_level'; then
     log_level="--log-level=$(bashio::config 'log_level')"
 fi
+
+bashio::log.debug Command Line: \
+	$mqtt_broker \
+	$mqtt_port \
+	$mqtt_username \
+	$loggable_mqtt_password \
+	$mqtt_topic \
+	$hass_discovery \
+	$hass_discovery_prefix \
+	$endpoint \
+	$port \
+	$unit_system \
+	$log_level
+
 
 ecowitt2mqtt \
 	$mqtt_broker \
