@@ -17,8 +17,8 @@
 	"settings": { 
 		"terminal.integrated.shell.linux": "/bin/bash"
 	},
-	// "workspaceMount": "source=remote-workspace,target=/workspaces/test_hassio/addons/local/myaddon,type=volume",
-	"workspaceMount": "source=/Users/sujal/code/sujal/ecowitt-addon,target=/workspaces/test_hassio/addons/local/myaddon,type=bind,consistency=cached",
+	"workspaceMount": "source=remote-workspace,target=/workspaces/test_hassio/addons/local/myaddon,type=volume,consistency=cached",
+	// "workspaceMount": "source=/Users/sujal/code/sujal/ecowitt-addon,target=/workspaces/test_hassio/addons/local/myaddon,type=bind,consistency=cached",
 	"workspaceFolder": "/workspaces/test_hassio/addons/local/myaddon",
 	"mounts": [
 		// Cache docker images between devcontainer rebuilds (and share between devcontainers)
