@@ -11,8 +11,9 @@
   "init": false,
   "stage": "experimental",
   "homeassistant": "2020.12.0",
+  "host_network": true,
   "ports": {
-    "8080/tcp": null
+    "8080/tcp": 8080
   },
   "ports_description": {
     "8080/tcp": "ecowitt2mqtt port"
@@ -29,11 +30,11 @@
     "unit_system": "imperial"
   },
   "schema": {
-    "mqtt_topic": "str?",
     "hass_discovery": {
       "enabled": "bool",
       "prefix": "str"
     },
+    "mqtt_topic": "str?",
     "endpoint": "str?",
     "unit_system": "match(imperial|metric)",
     "log_level": "match(INFO|WARN|DEBUG)?"

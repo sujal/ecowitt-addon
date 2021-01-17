@@ -75,6 +75,8 @@ function run_supervisor() {
         --name hassio_supervisor \
         --security-opt seccomp=unconfined \
         --security-opt apparmor:unconfined \
+        -p 0.0.0.0:8123:8123 \
+        -p 0.0.0.0:8055:8080 \
         -v /run/docker.sock:/run/docker.sock \
         -v /run/dbus:/run/dbus \
         -v "/workspaces/test_hassio":/data \

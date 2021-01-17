@@ -30,12 +30,12 @@ mqtt_password=
 
 if [[ ! -z MQTT_USERNAME ]]; then
     mqtt_username="--mqtt-username=${MQTT_USERNAME}"
-    mqtt_password"--mqtt-password=${MQTT_PASSWORD}"
+    mqtt_password="--mqtt-password=${MQTT_PASSWORD}"
 fi
 
 # declare variables
 mqtt_topic=
-hass_discovery =
+hass_discovery=
 hass_discovery_prefix=
 endpoint=
 port=
